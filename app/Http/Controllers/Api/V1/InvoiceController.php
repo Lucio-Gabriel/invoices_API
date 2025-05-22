@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\InvoiceResource;
 use App\Models\Invoice;
-use App\Traits\HttpResponse;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,9 +16,11 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return InvoiceResource::collection(Invoice::with('user')->get());
+        //return InvoiceResource::collection(Invoice::with('user')->get());
+
+        return (new Invoice())->filter($request);
     }
 
 
